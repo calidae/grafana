@@ -20,7 +20,7 @@ describe('ThresholdManager', function() {
 
       ctx.setup = function(thresholds) {
         ctx.panel.thresholds = thresholds;
-        var manager = new ThresholdManager(ctx.panelCtrl);
+        var manager = new ThresholdManager(ctx.panelCtrl, ctx);
         manager.addFlotOptions(ctx.options, ctx.panel);
       };
 

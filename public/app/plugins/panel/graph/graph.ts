@@ -38,7 +38,7 @@ function graphDirective($rootScope, timeSrv, popoverSrv, contextSrv) {
       var rootScope = scope.$root;
       var panelWidth = 0;
       var eventManager = new EventManager(ctrl);
-      var thresholdManager = new ThresholdManager(ctrl);
+      var thresholdManager = new ThresholdManager(ctrl, contextSrv.isEditor);
       var tooltip = new GraphTooltip(elem, dashboard, scope, function() {
         return sortedSeries;
       });

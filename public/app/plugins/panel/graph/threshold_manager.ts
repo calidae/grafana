@@ -10,7 +10,7 @@ export class ThresholdManager {
   needsCleanup: boolean;
   hasSecondYAxis: any;
 
-  constructor(private panelCtrl) {}
+  constructor(private panelCtrl, private isEditor) {}
 
   getHandleHtml(handleIndex, model, valueStr) {
     var stateClass = model.colorMode;
@@ -107,7 +107,7 @@ export class ThresholdManager {
   }
 
   shouldDrawHandles() {
-    return !this.hasSecondYAxis && this.panelCtrl.editingThresholds && this.panelCtrl.panel.thresholds.length > 0;
+    return !this.hasSecondYAxis && this.isEditor && this.panelCtrl.panel.thresholds.length > 0;
   }
 
   prepare(elem, data) {
