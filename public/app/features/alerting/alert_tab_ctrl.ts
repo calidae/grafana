@@ -49,13 +49,8 @@ export class AlertTabCtrl {
   $onInit() {
     this.addNotificationSegment = this.uiSegmentSrv.newPlusButton();
 
-    // subscribe to graph threshold handle changes
-    var thresholdChangedEventHandler = this.graphThresholdChanged.bind(this);
-    this.panelCtrl.events.on('threshold-changed', thresholdChangedEventHandler);
-
     // set panel alert edit mode
     this.$scope.$on("$destroy", () => {
-      this.panelCtrl.events.off("threshold-changed", thresholdChangedEventHandler);
       this.panelCtrl.editingThresholds = false;
       this.panelCtrl.render();
     });
