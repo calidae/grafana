@@ -5,6 +5,7 @@ import './legend';
 import './series_overrides_ctrl';
 import './thresholds_form';
 
+import {ThresholdMapper} from 'app/features/alerting/threshold_mapper';
 import template from './template';
 import _ from 'lodash';
 import config from 'app/core/config';
@@ -128,6 +129,18 @@ class GraphCtrl extends MetricsPanelCtrl {
     this.events.on('data-snapshot-load', this.onDataSnapshotLoad.bind(this));
     this.events.on('init-edit-mode', this.onInitEditMode.bind(this));
     this.events.on('init-panel-actions', this.onInitPanelActions.bind(this));
+    this.events.on('threshold-changed', this.onThresholdChanged.bind(this));
+  }
+
+  onThresholdChanged(evt) {
+    for (var condition of this.panel.alert.conditions) {
+      if (condition.type === 'query') {
+        condition.evaluator.params[evt.handleIndex] = evt.threshold.value;
+        ThresholdMapper.alertToGraphThresholds(this.panel);
+        this.render();
+        break;
+      }
+    }
   }
 
   onInitEditMode() {
